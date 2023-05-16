@@ -1,10 +1,29 @@
 'use client'
 
+import { useState } from 'react';
 import Image from 'next/image';
 import Input  from '../(components)/Input'
 import Link from 'next/link';
 
 function SignUp() {
+	const [user, setUser] = useState({
+		email: "",
+		name: "",
+		password: "",
+		passwordConfirmation: ""
+	})
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		if(user.passwordConfirmation !== user.password){
+			throw new Error("password incorrect")
+		}
+
+		alert(`user's info: ${user.name}; ${user.email}; ${user.password};`)
+	}
+
+
 	return (
 		<div className="py-8 px-32 w-full h-screen">
 			<div className="py-6 bg-gray-100 rounded-lg font-sans text-gray-800 grid grid-cols-3 gap-4">
@@ -17,13 +36,14 @@ function SignUp() {
 					/>
 					<h1 className="text-5xl text-indigo-900 font-bold text-center mb-4">Create your account</h1>
 					<div className="flex items-center w-full">
-						<form className="w-full px-6">
+						<form className="w-full px-6" method='POST' onSubmit={handleSubmit}>
 							<div className="w-full flex flex-col mb-3" id="Name">
 								<label htmlFor="Name" className="font-thin">Name</label>
 								<Input 
 									type="text"
 									placeholder="Name"
-									htmlFor="Name"
+									value={user.name}
+									method={(e) => setUser({ ...user, name: e.target.value})}
 								/>
 							</div>
 							<div className="w-full flex flex-col mb-3" id="Email">
@@ -31,7 +51,8 @@ function SignUp() {
 								<Input 
 									type="email"
 									placeholder="Email"
-									htmlFor="Email"
+									value={user.email}
+									method={(e) => setUser({ ...user, email: e.target.value})}
 								/>
 							</div>
 							<div className="w-full flex flex-col mb-3" id="Password">
@@ -39,7 +60,8 @@ function SignUp() {
 								<Input 
 									type="password"
 									placeholder="Password"
-									htmlFor="Password"
+									value={user.password}
+									method={(e) => setUser({ ...user, password: e.target.value})}
 								/>
 							</div>
 							<div className="w-full flex flex-col mb-3" id="Password"> 
@@ -47,7 +69,8 @@ function SignUp() {
 								<Input 
 									type="password"
 									placeholder="Password"
-									htmlFor="Password"
+									value={user.passwordConfirmation}
+									method={(e) => setUser({ ...user, passwordConfirmation: e.target.value})}
 								/>
 							</div>
 							<button 
