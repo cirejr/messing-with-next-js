@@ -1,4 +1,4 @@
-const Input = ({type, placeholder, value, method}) => {
+const Input = ({type, placeholder, value, method, ...props}) => {
   return(
 	<input 
 		type={type}
