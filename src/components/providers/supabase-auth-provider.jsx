@@ -3,7 +3,7 @@
 import { createContext, useContext, useEffect } from "react"
 import { useSupabase } from "./supabase-provider";
 import { useRouter } from "next/navigation";
-import useSWR  from "swr";
+import useSWR from "swr";
 
 const Context = createContext({
 	user: null,
@@ -21,22 +21,30 @@ const SupabaseAuthProvider = ({ serverSession, children }) => {
 
 	//Get USER
 	const getUser = async () => {
-		const { data : { user, error }} = await supabase.from('Profiles').select("*").eq("id", serverSession?.user?.id).single();
-		if(error){
-			console.log(error)
-			return null
-		} else 
-			return user;
+		try {
+			const { data : { user, error} } = await supabase.from('profiles').select('*').eq('id', serverSession?.user?.id).single();
+			if (error) {
+				console.log(error);
+				return null;
+			} else {
+				return user ?? null;
+			}
+		} catch (error) {
+			console.log(error);
+			return null;
+		}	
 	}
 
-	const { 
+	console.log(getUser())
+
+	/*const { 
 		data: {
 			user, 
 			error, 
 			loading, 
 			mutate
 		}
-	} = useSWR(serverSession ? "profile-context " : null, getUser )
+	} = useSWR(serverSession ? "profile-context " : null, getUser )*/
 
 	//Sign Out
 	const signOut = async () => {
@@ -54,10 +62,11 @@ const SupabaseAuthProvider = ({ serverSession, children }) => {
 		await supabase.auth.signInWithPassword({email, password})
 	};
 
-	if (error) {
-		return error.message
-	}else 
+	/*if (data.error) {
+		return data/error.message
+	}else{ 
 		null
+		}*/
 
 	useEffect(() => {
 		const { data : { subscription } } = supabase.auth.onAuthStateChange((event, session)=> {
@@ -69,7 +78,7 @@ const SupabaseAuthProvider = ({ serverSession, children }) => {
 		return () => subscription.unsubscribe() 
 	}, [router, supabase, serverSession?.access_token])	
 	
-	const exposed = { user, error, loading, mutate, signOut, signInWithGithub, signInWithEmail }
+	const exposed = { /*user, error, loading, mutate*/ signOut, signInWithGithub, signInWithEmail }
 
 	return <Context.Provider value={exposed}> {children} </Context.Provider>
 }
@@ -78,8 +87,9 @@ export const useAuth = () => {
 	const context = useContext(Context)
 	if( context === undefined){
 		throw new Error("useAuth must be used inside SupabaseAuthProvider")
-	}else
-		return context; 
+	}else{
+		return context;
+		}
 }
 
 export default SupabaseAuthProvider;

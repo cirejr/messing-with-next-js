@@ -1,3 +1,4 @@
+import "server-only"
 import './globals.css'
 import Navbar  from '../components/Navbar'
 import SupabaseProvider from '@/components/providers/supabase-provider'
@@ -19,13 +20,12 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body>
-		<Navbar />
-		<SupabaseProvider>
-			<SupabaseAuthProvider serverSession={session}>
-				{children}
-			</SupabaseAuthProvider>
-		</SupabaseProvider>
+      <body className="bg-gradient-to-tr from-black via-blue-950 to-black from-30% bg-opacity-75">
+			<SupabaseProvider>
+				<SupabaseAuthProvider serverSession={session}>
+					{children}
+				</SupabaseAuthProvider>
+			</SupabaseProvider>
 	  </body>
     </html>
   )

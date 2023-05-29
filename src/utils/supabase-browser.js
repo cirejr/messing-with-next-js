@@ -1,7 +1,7 @@
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 
 const createClient = () => {
-	createBrowserSupabaseClient()
+	return createBrowserSupabaseClient()
 }
 
 export default createClient;
