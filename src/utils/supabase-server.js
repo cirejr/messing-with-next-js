@@ -7,6 +7,8 @@ const supabaseKey= process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
 const createClient = () => {
 	return createServerComponentSupabaseClient({
+		supabaseUrl,
+		supabaseKey,
 		headers,
 		cookies 
 	})

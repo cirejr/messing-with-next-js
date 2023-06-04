@@ -7,7 +7,7 @@ const Card = ({ title, description }) => {
 				backdrop-blur-sm drop-shadow-lg lg:w-1/2 p-6 
 				rounded-lg h-44 bg-opacity-60 hover:-translate-y-50 
 				transition ease-in-out duration-300 delay-75 hover:scale-110
-				flex flex-col gap-2">
+				flex flex-col gap-2 mb-4">
 			<Link 
 				href="/firebase/admin" 
 				className="text-3xl font-sans font-semibold text-cyan-500 flex 

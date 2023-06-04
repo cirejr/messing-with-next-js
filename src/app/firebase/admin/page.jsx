@@ -24,11 +24,17 @@ const Page = () => {
 		return router.refresh()
 	}
 
+
+
 	return (
 		<div className="flex items-center justify-center w-full h-screen p-12 flex-col">
-			<h1 className="text-4xl text-black font-bold">Only logged in user can access this page</h1>
+			<h1 
+				className="text-5xl mb-3 p-3 font-sans bg-clip-text text-transparent bg-gradient-to-r 
+					from-violet-600 via-blue-400 to-slate-50 font-semibold">
+						Only logged in user can access this page
+			</h1>
 
-			<button className="rounded-lg p-3 bg-slate-600 text-black " onClick={logout}>Log out </button>
+			<button className="rounded-lg py-4 px-8 hover:bg-gradient-to-br hover:from-sky-500 hover:to-violet-800 hover:text-white bg-gradient-to-tl from-indigo-600 to-cyan-300 font-semibold text-black font-source text-2xl" onClick={logout}> Log Out </button>
 		</div>
 	);
 }

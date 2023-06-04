@@ -21,7 +21,7 @@ const Page = () => {
 
 		console.log(result)
 
-		return router.push("/admin")
+		return router.push("/firebase/admin")
 	}
 	return (
 		<div className="h-screen">
@@ -49,7 +49,7 @@ const Page = () => {
 						<SubmitButton />
 					</form>
 				</div>
-				<div className="col-span-2 px-16 m-auto h-full w-full flex items-center justify-center bg-indigo-600">
+				<div className="col-span-2 px-16 m-auto h-full w-full flex items-center justify-center bg-slate-950 bg-opacity-70 backdrop-blur-md backdrop-filter">
 					<h1 className="text-4xl font-bold text-indigo-100">Sign In</h1>
 				</div>
 			</div>
